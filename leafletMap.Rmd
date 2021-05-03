@@ -1,0 +1,52 @@
+---
+title: "Leaflet Map Project"
+author: "Aiyrui"
+date: "5/2/2021"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## May 2, 2021
+
+```{r, message=FALSE, warning=FALSE}
+library(leaflet)
+set.seed(2017-05-29)
+
+coordinates <- data.frame(lat = runif(100, min = 51.3072, max = 51.6072),
+                          lng = runif(100, min = -0.2275, max = -0.0275),
+                          col = sample(c("a", "b", "c"), 100, replace = TRUE),
+                          stringsAsFactors = FALSE)
+
+leafIcons <- icons(
+  iconUrl = ifelse(coordinates$col == "a", 
+               "http://leafletjs.com/examples/custom-icons/leaf-green.png",
+               ifelse(coordinates$col == "b", 
+                    "http://leafletjs.com/examples/custom-icons/leaf-red.png", 
+                    "https://leafletjs.com/examples/custom-icons/leaf-orange.png")
+               ),
+  iconWidth = 38, iconHeight = 95,
+  iconAnchorX = 22, iconAnchorY = 94,
+  shadowUrl = "http://leafletjs.com/examples/custom-icons/leaf-shadow.png",
+  shadowWidth = 50, shadowHeight = 64,
+  shadowAnchorX = 4, shadowAnchorY = 62
+)
+
+leaflet(coordinates) %>% addTiles() %>% addMarkers(clusterOptions = markerClusterOptions(), icon = leafIcons)
+
+# leafIcons <- iconList(
+#     green = makeIcon("http://leafletjs.com/examples/custom-icons/leaf-green.png",iconWidth = 38, iconHeight = 95, iconAnchorX = 22, iconAnchorY = 94,
+#   shadowUrl = "http://leafletjs.com/examples/custom-icons/leaf-shadow.png",
+#   shadowWidth = 50, shadowHeight = 64, shadowAnchorX = 4, shadowAnchorY = 62),
+#   
+#   red = makeIcon("http://leafletjs.com/examples/custom-icons/leaf-red.png",iconWidth = 38, iconHeight = 95, iconAnchorX = 22, iconAnchorY = 94,
+#   shadowUrl = "http://leafletjs.com/examples/custom-icons/leaf-shadow.png",
+#   shadowWidth = 50, shadowHeight = 64, shadowAnchorX = 4, shadowAnchorY = 62),
+#   
+#   orange = makeIcon("https://leafletjs.com/examples/custom-icons/leaf-orange.png",iconWidth = 38, iconHeight = 95, iconAnchorX = 22, iconAnchorY = 94,
+#   shadowUrl = "http://leafletjs.com/examples/custom-icons/leaf-shadow.png",
+#   shadowWidth = 50, shadowHeight = 64, shadowAnchorX = 4, shadowAnchorY = 62)
+# )
+```
