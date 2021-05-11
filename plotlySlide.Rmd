@@ -1,0 +1,31 @@
+---
+title: "plotlySlide"
+author: "Aiyrui"
+date: "5/10/2021"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## May 10, 2021
+```{r cars, message=FALSE, warning=FALSE}
+library(plotly)
+library(dplyr)
+
+stateInc <- data.frame(State = state.abb, Pop = as.vector(state.x77[,1]),Income = as.vector(state.x77[,2]))
+stateInc$hover <- with(stateInc, paste(State, '<br>', "Population:", Pop, "\n", "Income (Per Capita):", Income ))
+borders <- list(color = toRGB("blue"))
+mapOptions <- list(
+    scope = "usa",
+    projection = list(type = "albers usa"),
+    showlakes = TRUE,
+    lakecolor = toRGB("white")
+)
+
+plot_ly(stateInc, z = stateInc$Income, text = stateInc$hover, locations = stateInc$State, type = "choropleth", locationmode = "USA-states", color = stateInc$Income, colorscale = "Viridis",  marker = list(line = borders)) %>% layout(title = "US Income in 1974", geo = mapOptions)
+
+```
+
+
