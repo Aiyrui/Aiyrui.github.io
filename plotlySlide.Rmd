@@ -24,7 +24,7 @@ mapOptions <- list(
     lakecolor = toRGB("white")
 )
 
-plot_ly(stateInc, z = stateInc$Income, text = stateInc$hover, locations = stateInc$State, type = "choropleth", locationmode = "USA-states", color = stateInc$Income, colorscale = "Viridis",  marker = list(line = borders)) %>% layout(title = "US Income in 1974", geo = mapOptions)
+plot_ly(stateInc, z = stateInc$Income, text = stateInc$hover, locations = stateInc$State, type = "choropleth", locationmode = "USA-states", color = stateInc$Income, colorscale = "Viridis",  marker = list(line = borders)) %>% layout(title = "US Population & Income in 1974", geo = mapOptions)
 
 ```
 
